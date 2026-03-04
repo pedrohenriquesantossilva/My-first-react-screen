@@ -102,3 +102,96 @@ const styles = StyleSheet.create({
   
   
 });
+
+
+calculadora
+
+
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+
+export default function App() {
+  const [num1, setNum1] = useState(""); 
+  const [num2, setNum2] = useState( "" );
+  const [resultado,  setResultado] = useState(null) ;
+
+  const somar = () => {
+    const n1 = parseF1oat(num1); 
+    const n2 = parseF1oat(num2);
+
+    if( isNaN(n1)  || isNaN(n2)) {
+      setResultado('Digite nùmeros valîdos!');
+    } else {
+      setResultado(n1 + n2);
+      }
+    };
+
+    return(
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Calculadora de Soma</Text>
+
+        <TextInput 
+          style={styles.input}
+          placeholder= 'Digite o primeîro nùnero' 
+          keyboardType="numeric"
+          value={num1}
+          onChangeText={setNum1}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder= 'Digite o segundo nùnero' 
+          keyboardType="numeric"
+          value={num2}
+          onChangeText={setNum2}
+        />
+        <View style={styles.botao}>
+          <Button title = "Somar" onPress = {somar} />
+        </View> 
+
+        {resultado !== null && (
+          <Text style={styles.resultado}>resultado:{resultado}</Text>
+        )}
+      </View>
+    );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center', 
+    alignltems: 'center', 
+    backgroundColor: '#f0f4f7', 
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight : 'bold',
+    marginBottom: 20,
+  },
+
+  input: {
+  width: "80%", 
+  borderWidth: 1, 
+  bonderColor : "#ccc", 
+  backgroundColor: "#fff", 
+  padding: 10,
+  borderRadius : 8,
+  marginBottom: 10, 
+  textAlign: "center",
+  },
+
+  botao: {
+    width : "60%" ,
+    marginVertical: 10,
+  },
+  
+  resultado: { 
+    fontsize: 20, 
+    fontWeight: "bold",
+    marginTop: 15,
+  },
+});
+
+
