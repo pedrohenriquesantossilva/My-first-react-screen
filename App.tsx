@@ -114,6 +114,7 @@ export default function App() {
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
   const [resultado, setResultado] = useState(null);
+  const [resultad, setResultad] = useState(null);
 
   const somar = () => {
     const n1 = parseFloat(num1);
@@ -125,10 +126,20 @@ export default function App() {
       setResultado(n1 + n2);
     }
   };
+  const menos = () => {
+    const n1 = parseFloat(num1);
+    const n2 = parseFloat(num2);
+
+    if (isNaN(n1) || isNaN(n2)) {
+      setResultad("Digite números válidos!");
+    } else {
+      setResultad(n1 - n2);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Calculadora de Soma</Text>
+      <Text style={styles.titulo}>Calculadora</Text>
       
       <TextInput
         style={styles.input}
@@ -151,8 +162,17 @@ export default function App() {
         <Button title="Somar" onPress={somar} color="#2196F3" />
       </View>
 
+      <View style={styles.botao2}>
+        <Button title="menos" onPress={menos} color="#2196F3" />
+      </View>
+
+
       {resultado !== null && (
         <Text style={styles.resultado}>Resultado: {resultado}</Text>
+      )}
+
+      {resultado !== null && (
+        <Text style={styles.resultad}>Resultad: {resultad}</Text>
       )}
     </View>
   );
@@ -170,41 +190,41 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 50,
-    marginTop: -40
-    
+    marginBottom: 30,
   },
   input: {
-    width: "80%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    backgroundColor: "lightblue",
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-
-  input2: {
     width: "80%",
     borderWidth: 1,
     borderColor: "#ccc",
     backgroundColor: "lightgreen",
     padding: 10,
     borderRadius: 8,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input2: {
+    width: "80%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 8,
     marginBottom: 10,
     textAlign: "center",
   },
   botao: {
-    borderRadius: '8px',
     width: "60%",
     marginVertical: 10,
-    
+  },
+
+  botao2: {
+    width: "60%",
+    marginVertical: 10,
   },
   resultado: {
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 15,
-    color: "black",
+    color: "#333",
   },
 });
