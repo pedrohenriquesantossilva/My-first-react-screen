@@ -111,87 +111,100 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 export default function App() {
-  const [num1, setNum1] = useState(""); 
-  const [num2, setNum2] = useState( "" );
-  const [resultado,  setResultado] = useState(null) ;
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [resultado, setResultado] = useState(null);
 
   const somar = () => {
-    const n1 = parseF1oat(num1); 
-    const n2 = parseF1oat(num2);
+    const n1 = parseFloat(num1);
+    const n2 = parseFloat(num2);
 
-    if( isNaN(n1)  || isNaN(n2)) {
-      setResultado('Digite nùmeros valîdos!');
+    if (isNaN(n1) || isNaN(n2)) {
+      setResultado("Digite números válidos!");
     } else {
       setResultado(n1 + n2);
-      }
-    };
+    }
+  };
 
-    return(
-      <View style={styles.container}>
-        <Text style={styles.titulo}>Calculadora de Soma</Text>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Calculadora de Soma</Text>
+      
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o primeiro número"
+        keyboardType="numeric"
+        value={num1}
+        onChangeText={setNum1}
+      />
+      
+      <TextInput
+        style={styles.input2}
+        placeholder="Digite o segundo número"
+        // Corrigido: keyboardType (estava separado)
+        keyboardType="numeric" 
+        value={num2}
+        onChangeText={setNum2}
+      />
 
-        <TextInput 
-          style={styles.input}
-          placeholder= 'Digite o primeîro nùnero' 
-          keyboardType="numeric"
-          value={num1}
-          onChangeText={setNum1}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder= 'Digite o segundo nùnero' 
-          keyboardType="numeric"
-          value={num2}
-          onChangeText={setNum2}
-        />
-        <View style={styles.botao}>
-          <Button title = "Somar" onPress = {somar} />
-        </View> 
-
-        {resultado !== null && (
-          <Text style={styles.resultado}>resultado:{resultado}</Text>
-        )}
+      <View style={styles.botao}>
+        <Button title="Somar" onPress={somar} color="#2196F3" />
       </View>
-    );
+
+      {resultado !== null && (
+        <Text style={styles.resultado}>Resultado: {resultado}</Text>
+      )}
+    </View>
+  );
 }
 
+// Faltava o sinal de "=" e vírgulas entre as propriedades do estilo
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', 
-    alignltems: 'center', 
-    backgroundColor: '#f0f4f7', 
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f0f4f7",
     padding: 20,
   },
-
   titulo: {
     fontSize: 24,
-    fontWeight : 'bold',
-    marginBottom: 20,
+    fontWeight: "bold",
+    marginBottom: 50,
+    marginTop: -40
+    
   },
-
   input: {
-  width: "80%", 
-  borderWidth: 1, 
-  bonderColor : "#ccc", 
-  backgroundColor: "#fff", 
-  padding: 10,
-  borderRadius : 8,
-  marginBottom: 10, 
-  textAlign: "center",
+    width: "80%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 20,
+    textAlign: "center",
   },
 
-  botao: {
-    width : "60%" ,
-    marginVertical: 10,
+  input2: {
+    width: "80%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "lightgreen",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10,
+    textAlign: "center",
   },
-  
-  resultado: { 
-    fontsize: 20, 
+  botao: {
+    borderRadius: '8px',
+    width: "60%",
+    marginVertical: 10,
+    
+  },
+  resultado: {
+    fontSize: 20,
     fontWeight: "bold",
     marginTop: 15,
+    color: "black",
   },
 });
-
-
