@@ -228,3 +228,98 @@ const styles = StyleSheet.create({
     color: "#333",
   },
 });
+
+
+//- Botao login //-
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+
+export default function App() {
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  const [tela, setTela] = useState('');
+
+  function validarLogin() {
+    setMensagem('');
+    if (login === 'admin' && senha === '123456') {
+      setTela('mudar');
+    } else {
+      setMensagem('Login ou senha incorretos.');
+    }
+  }
+
+  function voltarTela() {
+    setTela('');
+    setLogin('');
+    setSenha('');
+    setMensagem('');
+  }
+
+  if (tela === 'mudar') {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.texto}>Mudou de tela!</Text>
+        <Button title="Sair" onPress={voltarTela} style={styles.botao} />
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Tela de Login</Text>
+      <Text>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o seu login"
+        onChangeText={setLogin}
+      />
+
+      <Text>Senha:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite a sua senha"
+        onChangeText={setSenha}
+      />
+
+      <Button title="Entrar" style={styles.botao} onPress={validarLogin} />
+
+      <Text>{mensagem}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#4caf50',
+    flex: 1,
+  },
+
+  input: {
+    textAlign: 'center',
+    backgroundColor: '#ccc',
+    borderRadius: 5,
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
+
+  titulo: {
+    fontSize: 25,
+    color: '#0000cd',
+    marginTop: '10px',
+    marginBottom: '10px'
+  },
+
+  botao: {
+    alignItems: 'center',
+    marginTop: '10px',
+  },
+
+  texto: {
+    marginBottom: '10px',
+    marginTop: '10px'
+  },
+});
